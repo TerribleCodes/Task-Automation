@@ -3,12 +3,16 @@ import ssl
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 import datetime
-
-import Additional
 import Scraper
+import re
 
 cont_1 = ''
-
+# regex = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
+# def check(email):
+#     if(re.fullmatch(regex, email)):
+#         print("Valid Email")
+#     else:
+#         print("Invalid Email")
 
 class ComposeEmail:
     @staticmethod
@@ -31,14 +35,13 @@ class ComposeEmail:
             receiver_email = input("Enter the Receiver's Email: ")
         elif choice == "send2":
             n = int(input("Enter the number of emails: "))
-            i = 0
             receiver_email = ''
             for i in range(n):
                 r_mail = input(f'Email {(i+1)}: ')
                 receiver_email += r_mail + ', '
         else:
             print("Invalid Input")
-            Additional.act_2()
+            ComposeEmail.sendmail()
         password = input("Enter the password: ")
 
         # Create a multipart message and set headers
